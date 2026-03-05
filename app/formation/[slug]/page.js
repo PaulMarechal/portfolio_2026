@@ -7,7 +7,7 @@ const formations = {
         description: "Formation au campus Pierre et Marie Curie à Paris", 
         technologies: ["React, JS, Php, Python, Java"],
     }, 
-    esieeit: {
+    esiee: {
         title: "Esiee[IT]", 
         slug: "esiee", 
         description: "Formation dans le 17e arrondissement en édu scrum. Avec des cours de PHP, JS, Python", 

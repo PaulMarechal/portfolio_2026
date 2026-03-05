@@ -10,7 +10,7 @@ export default function Formation(){
             </Link>
 
             <Link href="/formation/esiee" className={styles.card}>
-                <p>Esiee</p>
+                <p>esiee</p>
             </Link>
 
             <Link href="/formation/openclassroom" className={styles.card}>

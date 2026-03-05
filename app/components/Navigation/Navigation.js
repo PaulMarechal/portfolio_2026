@@ -1,11 +1,20 @@
 'use client'
 import Link from "next/link";
+import { useState } from "react";
 import { usePathname } from 'next/navigation'
 import styles from "./Navigation.module.css";
 
 export default function Navigation(){
-
+    const [isOpen, setIsOpen] = useState(false)
     const pathname = usePathname()
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen)
+    }
+
+    const closeMenu = () => {
+        setIsOpen(false)
+    }
 
     return(
         <nav className={styles.nav}>
@@ -13,6 +22,16 @@ export default function Navigation(){
                 <Link href="/" className={styles.logo}>
                     Mon Portfolio
                 </Link>
+
+                <button
+                    className={styles.burger}
+                    onClick={toggleMenu}
+                    aria-label="Menu"
+                >
+                    <span className={isOpen ? styles.burgerOpen : ''}></span>
+                    <span className={isOpen ? styles.burgerOpen : ''}></span>
+                    <span className={isOpen ? styles.burgerOpen : ''}></span>
+                </button>
 
                 <ul>
                     <li>
