@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "slug": "sorbonne",
+        "title": "Sorbonne", 
+        "description": "Formation au compus Pierre et Marie Curie à Jussieu", 
+        "languages": ["React", "Python", "Java", "JS", "Vue.js", "PHP", "SQL"]
+    }, 
+    {
+        "id": 2,
+        "slug": "esiee",
+        "title": "Esiee[IT]", 
+        "description": "Formaiton à Paris dans le 17e arrondissement",
+        "languages": ["React", "JS", "PHP", "SQL", "Three.js"]
+    }, 
+    {
+        "id": 3,
+        "slug": "openclassroom",
+        "title": "OpenClassRoom", 
+        "description": "Formation en ligne anciennement site du 0", 
+            "languages": ["PHP", "Python", "Java", "SCSS", "JS"]
+    }
+]

@@ -1,30 +1,15 @@
 import styles from "./page.module.css";
-
-const formations = {
-    sorbonne: {
-        title: "Sorbonne", 
-        slug: "sorbonne", 
-        description: "Formation au campus Pierre et Marie Curie à Paris", 
-        technologies: ["React, JS, Php, Python, Java"],
-    }, 
-    esiee: {
-        title: "Esiee[IT]", 
-        slug: "esiee", 
-        description: "Formation dans le 17e arrondissement en édu scrum. Avec des cours de PHP, JS, Python", 
-        technologies: ["React, JS, Php, Python, Java"],
-    }, 
-    openclassroom: {
-        title: "OpenClassRoom", 
-        slug: "openclassroom", 
-        description: "Formation en ligne de JS, PHP, Python", 
-        technologies: ["PHP, JS, Python"],
-    }
-}
+import formationsData from "@/data/formations.json"
+import { notFound } from "next/navigation"
 
 export default async function FormationDetails({params}){
     const {slug} = await params
 
-    const formation = formations[slug]
+    const formation = formationsData.find((formation) => formation.slug === slug); 
+
+    if(!formation){
+        notFound()
+    }
 
     if(!formation){
         return(
@@ -44,12 +29,19 @@ export default async function FormationDetails({params}){
 
             <div>
                 <h2>Langage appris</h2>
-                {formation.technologies.map((tech, index) => (
-                    <span key={index} className={styles.tech}>
-                        {tech}
+                {formation.languages.map((lang, index) => {
+                    <span key={index} className={styles.lang}>
+                        {lang}
                     </span>
-                ))}
+                })}
             </div>
         </div>
     )
+}
+
+// Cette function génère toutes les pages statiques au build 
+export function generateStaticParams(){
+    return formationsData.map((formation) => ({
+        slug: formation.map,
+    }))
 }

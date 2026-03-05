@@ -1,47 +1,16 @@
 import styles from "./page.module.css"
-
-// Liste des projets ( API OU DB normallement )
-const projets = {
-    portfolio: {
-        title: "Portfolio personnel",
-        slug: "portfolio",
-        description: "Site web moderne construit avec Next.js",
-        technologies: ["React", "R3F"],
-        github: "https://github.com/",
-        demo: "https://",
-    },
-    ecommerce: {
-        title: "App E-commerce",
-        slug: "ecommerce",
-        description: "Boutique en ligne (exemple) avec panier et paiement.",
-        technologies: ["Next.js", "React"],
-        github: "https://github.com/",
-        demo: "https://",
-    },
-    blog: {
-        title: "Blog Technique",
-        slug: "blog",
-        description: "Blog statique/dynamique (exemple) avec articles.",
-        technologies: ["Next.js", "MDX"],
-        github: "https://github.com/",
-        demo: "https://",
-    },
-}
+import { notFound } from "next/navigation"
+import projectsData from "@/data/projects.json"
 
 export default async function ProjectDetails({ params }){
     const { slug } = await params
 
     // Next passe automatiquement le slug dans les params
-    const project = projets[slug]
+    const project = projectsData.find((project) => project.slug === slug);
 
-    // Si le projet n'existe pas, afficher un message
+    // Si le projet n'existe pas affiche 404
     if(!project){
-        return(
-            <div>
-                <h1>Projet non trouvé</h1>
-                <p>Ce projet n&apos;existe pas ou a été supprimé.</p>
-            </div>
-        )
+        notFound()
     }
 
     return(
@@ -62,11 +31,11 @@ export default async function ProjectDetails({ params }){
                 <div>
                     <h2>Technologies utilisées</h2>
                     <div className={styles.technologies}>
-                        {project.technologies.map((tech, index) => (
+                        {project.tags.map((tech, index) => {
                             <span key={index} className={styles.tech}>
                                 {tech}
                             </span>
-                        ))}
+                        })}
                     </div>
 
                     <div className={styles.links}>
@@ -91,4 +60,11 @@ export default async function ProjectDetails({ params }){
             </div>
         </div>
     )
+}
+
+// Cette fonction génère toutes les pages statiques au build
+export function generateStaticParams() {
+   return projectsData.map((project) => ({
+       slug: project.slug,
+   }))
 }
